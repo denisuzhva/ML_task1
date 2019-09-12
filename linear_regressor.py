@@ -31,7 +31,7 @@ class LinearRegressor(Regressor):
             return np.sqrt(loss)
         elif self.__loss == 'R2':
             MSE_loss = np.sum(np.square(z_batch - self.getPrediction(x_batch))) / batch_size
-            MSE_loss = MSE_loss + np.linalg.norm(self.__w, 2) if regularize else MSE_loss
+            #MSE_loss = MSE_loss + np.linalg.norm(self.__w, 2) if regularize else MSE_loss
             loss = 1 - MSE_loss / (np.sum(np.square(z_batch - np.mean(z_batch))) / batch_size)
             return loss
 
@@ -52,10 +52,14 @@ class LinearRegressor(Regressor):
         elif self.__loss == 'R2':
             MSE_dw = -2 * np.dot((z_batch - self.getPrediction(x_batch)), x_batch) / batch_size
             MSE_db = -2 * np.sum(z_batch - self.getPrediction(x_batch)) / batch_size
-            dw = 1 - MSE_dw / (np.sum(np.square(z_batch - np.mean(z_batch))) / batch_size)
-            db = 1 - MSE_db / (np.sum(np.square(z_batch - np.mean(z_batch))) / batch_size)
-            self.__w -= lr * dw
-            self.__b -= lr * db
+            dw = -1 * MSE_dw / (np.sum(np.square(z_batch - np.mean(z_batch))) / batch_size)
+            db = -1 * MSE_db / (np.sum(np.square(z_batch - np.mean(z_batch))) / batch_size)
+            self.__w += lr * dw
+            self.__b += lr * db
+            #dw = -2 * np.dot((z_batch - self.getPrediction(x_batch)), x_batch) / batch_size
+            #db = -2 * np.sum(z_batch - self.getPrediction(x_batch)) / batch_size
+            #self.__w -= lr * dw
+            #self.__b -= lr * db 
 
 
     def resetWeights(self):

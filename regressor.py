@@ -23,3 +23,8 @@ class Regressor(metaclass=abc.ABCMeta):
     def updateParameters(self, z_batch, x_batch, batch_size, lr):
         pass
     
+
+    @abc.abstractmethod
+    def resetWeights(self):
+        pass
+

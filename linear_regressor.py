@@ -4,18 +4,15 @@ from regressor import Regressor
 
 
 class LinearRegressor(Regressor):
-    def __init__(self, num_features, reg_gamma):    # add loss name argument
+    def __init__(self, num_features, reg_gamma, loss_name='RMSE'):
         super().__init__(num_features)
         self.__w = np.zeros(self._num_features, dtype=np.float)    # w vector
         self.__b = 0    # bias
-        self.__loss = 'RMSE'
+        self.__loss = loss_name
         self.__acceptable_loss = ['MSE', 'RMSE', 'R2']
         self.__reg_gamma = reg_gamma    # regularization coefficient
 
-
-    def setLoss(self, loss_name):   # delet this
-        if not loss_name in self.__acceptable_loss:
-            raise Exception('Invalid loss function name')
+        assert self.__loss in self.__acceptable_loss
 
 
     def getPrediction(self, x):
@@ -33,7 +30,9 @@ class LinearRegressor(Regressor):
             loss = loss + np.linalg.norm(self.__w, 2) if regularize else loss
             return np.sqrt(loss)
         elif self.__loss == 'R2':
-            loss = 1
+            MSE_loss = np.sum(np.square(z_batch - self.getPrediction(x_batch))) / batch_size
+            MSE_loss = MSE_loss + np.linalg.norm(self.__w, 2) if regularize else MSE_loss
+            loss = 1 - MSE_loss / (np.sum(np.square(z_batch - np.mean(z_batch))) / batch_size)
             return loss
 
 
@@ -51,7 +50,12 @@ class LinearRegressor(Regressor):
             self.__w -= lr * dw
             self.__b -= lr * db
         elif self.__loss == 'R2':
-            pass
+            MSE_dw = -2 * np.dot((z_batch - self.getPrediction(x_batch)), x_batch) / batch_size
+            MSE_db = -2 * np.sum(z_batch - self.getPrediction(x_batch)) / batch_size
+            dw = 1 - MSE_dw / (np.sum(np.square(z_batch - np.mean(z_batch))) / batch_size)
+            db = 1 - MSE_db / (np.sum(np.square(z_batch - np.mean(z_batch))) / batch_size)
+            self.__w -= lr * dw
+            self.__b -= lr * db
 
 
     def resetWeights(self):

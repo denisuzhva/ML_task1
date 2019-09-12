@@ -24,6 +24,11 @@ class Trainer:
 
         assert self._train_labels.shape[0] == self._train_dataset_size
 
+
+    ## Setters
+    def setModel(self, model):
+        self._model = model
+
     
     ## Dataset Tools
     def shuffleDataset(self):
@@ -109,11 +114,11 @@ class Trainer:
                         #print('- Current epoch: %d -' % epoch_iter)
                         train_loss = self._model.evaluateLossPerBatch(train_labels, 
                                                                       train_folds,
-                                                                      batch_size,
+                                                                      fold_size * 5,
                                                                       self._reg)
                         val_loss = self._model.evaluateLossPerBatch(validation_labels, 
                                                                     validation_folds,
-                                                                    batch_size,
+                                                                    fold_size,
                                                                     self._reg)
                         assert ~np.isnan(train_loss)
                         assert ~np.isnan(val_loss) 

@@ -15,7 +15,7 @@ def parseToNp(dataset_path, label_col):
 if __name__ == '__main__':
     dataset_name = 'Features_Variant_1.csv'
     dataset_dir = './Dataset/'
-    label_col = 29
+    label_col = 30
     dataset_np, labels_np = parseToNp(dataset_dir + dataset_name, label_col)
     np.save(dataset_dir + 'FV1_ds.npy', dataset_np)
     np.save(dataset_dir + 'FV1_l.npy', labels_np)

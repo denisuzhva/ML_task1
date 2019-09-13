@@ -15,7 +15,7 @@ class Regressor(metaclass=abc.ABCMeta):
 
 
     @abc.abstractmethod
-    def evaluateLossPerBatch(self, z_batch, x_batch, batch_size, regularize):
+    def evaluateLoss(self, z_batch, x_batch, batch_size, regularize):
         pass
 
 

@@ -43,9 +43,9 @@ class LinearRegressor(Regressor):
             self.__b -= lr * db
         elif loss_type == 'RMSE':
             dw = -1 * np.dot((z_batch - self.getPrediction(x_batch)), x_batch) / \
-                (batch_size * self.evaluateLoss(z_batch, x_batch, batch_size, regularize))
+                (batch_size * self.evaluateLoss(z_batch, x_batch, batch_size, 'RMSE', regularize))
             db = -1 * np.sum(z_batch - self.getPrediction(x_batch)) / \
-                (batch_size * self.evaluateLoss(z_batch, x_batch, batch_size, regularize))
+                (batch_size * self.evaluateLoss(z_batch, x_batch, batch_size, 'RMSE', regularize))
             self.__w -= lr * dw
             self.__b -= lr * db
         elif loss_type == 'R2':
@@ -60,3 +60,7 @@ class LinearRegressor(Regressor):
     def resetWeights(self):
         self.__w = np.zeros(self._num_features, dtype=np.float)
         self.__b = 0
+
+    
+    def getWeights(self):
+        return self.__w, self.__b

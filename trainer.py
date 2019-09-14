@@ -72,11 +72,17 @@ class Trainer:
         fold_size = self._train_dataset_size // self._num_folds
 
         loss_tensor = np.zeros((len(self._batch_list),  # write at each batch
-                                  self._num_folds,  # at each fold
-                                  self._epoch_quantize_param,   # ...at each self._epoch_quantize_param's epoch
-                                  len(self._losses_to_write),    # for all the losses to write
-                                  2),   # for train and validation loss
-                                  dtype=np.float)   
+                                self._num_folds,  # at each fold
+                                self._epoch_quantize_param,   # ...at each self._epoch_quantize_param's epoch
+                                len(self._losses_to_write),    # for all the losses to write
+                                2),   # for train and validation loss
+                                dtype=np.float)  
+
+        weight_tensor = np.zeros((len(self._batch_list),
+                                  self._num_folds,
+                                  self._epoch_quantize_param,
+                                  self._num_features + 1),  # w1..wN, w0; N = 53
+                                  dtype=np.float) 
 
         time_tensor = np.zeros(len(self._batch_list), dtype=np.float)
 
@@ -113,6 +119,7 @@ class Trainer:
                                                      train_dataset_batch, 
                                                      batch_size, 
                                                      self._lr,
+                                                     'RMSE',
                                                      self._reg)
 
                     if epoch_iter % (self._num_epochs // self._epoch_quantize_param) == 0:
@@ -124,20 +131,24 @@ class Trainer:
                                                                   loss_type,
                                                                   self._reg)
                             val_loss = self._model.evaluateLoss(validation_labels, 
-                                                                     validation_folds,
-                                                                     fold_size,
-                                                                     loss_type,
-                                                                     self._reg)
+                                                                validation_folds,
+                                                                fold_size,
+                                                                loss_type,
+                                                                self._reg)
                             assert ~np.isnan(train_loss)
                             assert ~np.isnan(val_loss)   
                             #print('train loss (%s): %f' % (loss_type, train_loss))
-                            print('validation loss (%s): %f' % (loss_type, val_loss))
+                            #print('validation loss (%s): %f' % (loss_type, val_loss))
                             loss_tensor[batch_size_counter][fold_iter][quantized_epoch_iter][loss_counter][0] = train_loss
                             loss_tensor[batch_size_counter][fold_iter][quantized_epoch_iter][loss_counter][1] = val_loss
                         
+                        model_w, model_b = self._model.getWeights()
+                        model_w_full = np.append(model_w, model_b)
+                        weight_tensor[batch_size_counter][fold_iter][quantized_epoch_iter] = model_w_full
+
                         quantized_epoch_iter += 1
                         
             end_time = time.time()
             time_tensor[batch_size_counter] = end_time - start_time
 
-        return loss_tensor, time_tensor
+        return loss_tensor, weight_tensor, time_tensor

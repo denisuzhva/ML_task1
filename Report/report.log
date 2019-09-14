@@ -1,0 +1,138 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.14)  14 SEP 2019 19:17
+entering extended mode
+**./report.tex
+(report.tex
+LaTeX2e <2018-12-01>
+("C:\Users\epirt\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
+Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
+("C:\Users\epirt\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size10.clo"
+File: size10.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) ("C:\Users\epirt\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\inputenc.st
+y"
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+)
+("C:\Users\epirt\AppData\Local\Programs\MiKTeX 2.9\tex/latex/booktabs\booktabs.
+sty"
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen103
+\lightrulewidth=\dimen104
+\cmidrulewidth=\dimen105
+\belowrulesep=\dimen106
+\belowbottomsep=\dimen107
+\aboverulesep=\dimen108
+\abovetopsep=\dimen109
+\cmidrulesep=\dimen110
+\cmidrulekern=\dimen111
+\defaultaddspace=\dimen112
+\@cmidla=\count88
+\@cmidlb=\count89
+\@aboverulesep=\dimen113
+\@belowrulesep=\dimen114
+\@thisruleclass=\count90
+\@lastruleclass=\count91
+\@thisrulewidth=\dimen115
+)
+("C:\Users\epirt\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\longtable.st
+y"
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
+\LTleft=\skip43
+\LTright=\skip44
+\LTpre=\skip45
+\LTpost=\skip46
+\LTchunksize=\count92
+\LTcapwidth=\dimen116
+\LT@head=\box27
+\LT@firsthead=\box28
+\LT@foot=\box29
+\LT@lastfoot=\box30
+\LT@cols=\count93
+\LT@rows=\count94
+\c@LT@tables=\count95
+\c@LT@chunks=\count96
+\LT@p@ftn=\toks16
+)
+No file report.aux.
+\openout1 = `report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 11.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 15.
+("C:\Users\epirt\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 17.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 17.
+
+Underfull \vbox (badness 10000) detected at line 46
+ []
+
+[1
+
+{C:/Users/epirt/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 1 on input line 86.
+
+
+Package longtable Warning: Table widths have changed. Rerun LaTeX.
+
+[2] (report.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 411 strings out of 492895
+ 5183 string characters out of 3123735
+ 85243 words of memory out of 3000000
+ 4392 multiletter control sequences out of 15000+200000
+ 6675 words of font info for 24 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 23i,6n,19p,143b,199s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/epirt/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmmi10.pfb><C:/Users/epirt/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb><C:/Users/epirt/AppData/Local/Programs/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/epirt/AppData/Local/Programs/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/epirt/AppData/Loca
+l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/epirt/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on report.pdf (2 pages, 66127 bytes).
+PDF statistics:
+ 33 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

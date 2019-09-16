@@ -30,6 +30,7 @@ def plotLoss(loss_data, fold_num, is_rmse=True, is_train=True):
 if __name__ == '__main__':
     loss_data = np.load('./TrainData/train_loss.npy')
     #plotLoss(loss_data, 2, True, True)
+    
     RMSE_row = loss_data[0, :, -1, 0, 1]
     RMSE_mean = np.mean(RMSE_row)
     RMSE_std = np.std(RMSE_row)

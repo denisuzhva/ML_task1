@@ -28,3 +28,7 @@ class Regressor(metaclass=abc.ABCMeta):
     def resetWeights(self):
         pass
 
+
+    @abc.abstractmethod
+    def getWeights(self):
+        pass

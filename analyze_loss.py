@@ -29,7 +29,7 @@ def plotLoss(loss_data, fold_num, is_rmse=True, is_train=True):
 
 if __name__ == '__main__':
     loss_data = np.load('./TrainData/train_loss.npy')
-    #plotLoss(loss_data, 2, True, True)
+    plotLoss(loss_data, 2, True, True)
     
     RMSE_row = loss_data[0, :, -1, 0, 1]
     RMSE_mean = np.mean(RMSE_row)
@@ -50,6 +50,7 @@ if __name__ == '__main__':
     R2_string = ' '.join(map(str, R2_row))
     print(RMSE_string)
     print(R2_string)
+
 
     np.savetxt('./TrainData/loss.csv', loss_rows, delimiter=' ', fmt='%.2f')
 

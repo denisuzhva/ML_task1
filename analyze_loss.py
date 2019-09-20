@@ -6,6 +6,16 @@ rcParams['ytick.direction'] = 'in'
 
 
 
+def prepareRow(row):
+    row_mean = np.mean(row)
+    row_std = np.std(row)
+    row = np.append(row, row_mean)
+    row = np.append(row, row_std)
+    row = np.round(row, 2)
+    print(row.shape)
+    return row
+
+
 def plotLoss(loss_data, fold_num, is_rmse=True, is_train=True):
     epoch_data = np.arange(0, 1000, 10)
     plot_data = loss_data[:, fold_num, :, 0 if is_rmse else 1, 0 if is_train else 1]
@@ -29,27 +39,26 @@ def plotLoss(loss_data, fold_num, is_rmse=True, is_train=True):
 
 if __name__ == '__main__':
     loss_data = np.load('./TrainData/train_loss.npy')
-    plotLoss(loss_data, 2, True, True)
+    #plotLoss(loss_data, 2, True, False)
     
-    RMSE_row = loss_data[0, :, -1, 0, 1]
-    RMSE_mean = np.mean(RMSE_row)
-    RMSE_std = np.std(RMSE_row)
-    RMSE_row = np.append(RMSE_row, RMSE_mean)
-    RMSE_row = np.append(RMSE_row, RMSE_std)
-    RMSE_row = np.round(RMSE_row, 2)
+    rows = [loss_data[0, :, -1, 0, 1],   # RMSE val 
+            loss_data[0, :, -1, 0, 0],   # RMSE train 
+            loss_data[0, :, -1, 1, 1],   # R2 val
+            loss_data[0, :, -1, 1, 0]   # R2 train
+            ]
 
-    R2_row = loss_data[0, :, -1, 1, 1]
-    R2_mean = np.mean(R2_row)
-    R2_std = np.std(R2_row)
-    R2_row = np.append(R2_row, R2_mean)
-    R2_row = np.append(R2_row, R2_std)
-    R2_row = np.round(R2_row, 2)
+    for row_count, row  in enumerate(rows, start=0):
+        rows[row_count] = prepareRow(row)
 
-    loss_rows = np.stack((RMSE_row, R2_row), axis=0)
-    RMSE_string = ' '.join(map(str, RMSE_row))
-    R2_string = ' '.join(map(str, R2_row))
-    print(RMSE_string)
-    print(R2_string)
+
+    loss_rows = np.stack((rows[0], 
+                          rows[1], 
+                          rows[2],
+                          rows[3]), axis=0)
+    RMSE_val_string = ' '.join(map(str, rows[0]))
+    RMSE_train_string = ' '.join(map(str, rows[1]))
+    R2_val_string = ' '.join(map(str, rows[2]))
+    R2_train_string = ' '.join(map(str, rows[3]))
 
 
     np.savetxt('./TrainData/loss.csv', loss_rows, delimiter=' ', fmt='%.2f')

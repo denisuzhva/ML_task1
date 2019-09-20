@@ -27,6 +27,7 @@ if __name__ == '__main__':
 
     trainer.reduceTrainDataset()
     trainer.normalizeDatasets()
+    trainer.shuffleDataset()
 
     train_loss_data, train_weights_data, time_data = trainer.trainModel()
 

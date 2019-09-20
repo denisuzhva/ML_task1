@@ -3,15 +3,15 @@ from linear_regressor import LinearRegressor
 from trainer import Trainer
 
 
-NUM_FEATURES = 53
-LR = 1 * 1e-1
-BATCH_LIST = [100, 200, 400, 800, 1600]
+NUM_FEATURES = 53   # number of features
+LR = 1 * 1e-1   # learning rate constant
+BATCH_LIST = [100, 200, 400, 800, 1600] # batches to test
 #BATCH_LIST = [1600]
-NUM_EPOCHS = 1000
-EPOCH_QUANTIZER = 100
-NUM_FOLDS = 5
-LOSSES_TO_WRITE = ['RMSE', 'R2']
-REG_GAMMA = 0.1
+NUM_EPOCHS = 1000   # number of epochs
+EPOCH_QUANTIZER = 100   # write loss values each "EPOCH_QUANTIZER" time
+NUM_FOLDS = 5   # number of folds
+LOSSES_TO_WRITE = ['RMSE', 'R2']    # list of losses to write
+REG_GAMMA = 0.1 # gamma parameter (for regularization)
 
 
 if __name__ == '__main__':
@@ -25,9 +25,9 @@ if __name__ == '__main__':
                       LOSSES_TO_WRITE,
                       EPOCH_QUANTIZER)
 
-    trainer.reduceTrainDataset()
-    trainer.normalizeDatasets()
-    trainer.shuffleDataset()
+    trainer.reduceTrainDataset()    # reduce the number of data samples so it could be divisible by batch_size*num_folds 
+    trainer.normalizeDatasets() # normalize data set
+    trainer.shuffleDataset()    # shuffle data samples
 
     train_loss_data, train_weights_data, time_data = trainer.trainModel()
 

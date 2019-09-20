@@ -5,10 +5,10 @@ from regressor import Regressor
 
 class LinearRegressor(Regressor):
     def __init__(self, num_features, reg_gamma):
-        super().__init__(num_features)
+        super().__init__(num_features)  # initialize parent fields
         self.__w = np.zeros(self._num_features, dtype=np.float)    # w vector
         self.__b = 0    # bias
-        self.__acceptable_loss = ['MSE', 'RMSE', 'R2']
+        self.__acceptable_loss = ['MSE', 'RMSE', 'R2']  # for asserts
         self.__reg_gamma = reg_gamma    # regularization coefficient
 
 

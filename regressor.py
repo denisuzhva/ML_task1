@@ -5,7 +5,7 @@ import abc
 
 class Regressor(metaclass=abc.ABCMeta):
     def __init__(self, num_features):
-        self._num_features = num_features
+        self._num_features = num_features   # number of features
 
 
     ## Model Tools

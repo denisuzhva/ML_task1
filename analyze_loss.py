@@ -16,19 +16,19 @@ def prepareRow(row):
     return row
 
 
-def plotLoss(loss_data, fold_num, is_rmse=True, is_train=True):
+def plotLoss(metric_data, fold_num, is_rmse=True, is_train=True):
     epoch_data = np.arange(0, 1000, 10)
-    plot_data = loss_data[:, fold_num, :, 0 if is_rmse else 1, 0 if is_train else 1]
+    plot_data = metric_data[:, fold_num, :, 0 if is_rmse else 1, 0 if is_train else 1]
     plt.figure(figsize=(12, 8))
     for batch_iter in range(plot_data.shape[0]):
         plt.plot(epoch_data, plot_data[batch_iter, :], label='BS = %d' % (100 * 2 ** (0+batch_iter)))
     
     plt.axis([0, 1000, 0, np.max(plot_data) * 1.2])
 
-    plt.title('Loss on epoch (fold number: %d, %s loss)' % (fold_num, 'train' if is_train else 'validation'))
+    plt.title('Metric on epoch (fold number: %d, %s loss)' % (fold_num, 'train' if is_train else 'validation'))
     plt.legend(fontsize=10)
     plt.xlabel('Epoch', fontsize=14)
-    plt.ylabel('loss', fontsize=14)
+    plt.ylabel('Metric value', fontsize=14)
     
     plt.minorticks_on()
     plt.grid(b=True, which='major', color='#666666', linestyle='-', alpha=0.2)
@@ -38,13 +38,14 @@ def plotLoss(loss_data, fold_num, is_rmse=True, is_train=True):
 
 
 if __name__ == '__main__':
-    loss_data = np.load('./TrainData/train_loss.npy')
-    #plotLoss(loss_data, 2, True, False)
+    metric_data = np.load('./TrainData/metrics.npy')
+    #plotLoss(metric_data, 2, True, False)
     
-    rows = [loss_data[0, :, -1, 0, 1],   # RMSE val 
-            loss_data[0, :, -1, 0, 0],   # RMSE train 
-            loss_data[0, :, -1, 1, 1],   # R2 val
-            loss_data[0, :, -1, 1, 0]   # R2 train
+    batch = 0
+    rows = [metric_data[batch, :, -1, 0, 1],   # RMSE val 
+            metric_data[batch, :, -1, 0, 0],   # RMSE train 
+            metric_data[batch, :, -1, 1, 1],   # R2 val
+            metric_data[batch, :, -1, 1, 0]   # R2 train
             ]
 
     for row_count, row  in enumerate(rows, start=0):
@@ -61,5 +62,5 @@ if __name__ == '__main__':
     R2_train_string = ' '.join(map(str, rows[3]))
 
 
-    np.savetxt('./TrainData/loss.csv', loss_rows, delimiter=' ', fmt='%.2f')
+    np.savetxt('./TrainData/metrics.csv', loss_rows, delimiter=' ', fmt='%.2f')
 

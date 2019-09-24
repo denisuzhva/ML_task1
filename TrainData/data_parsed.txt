@@ -1,29 +1,3 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{booktabs}
-\usepackage{longtable}
-
-\begin{document}
-
-\title{ML task 1}
-\author{Denis Uzhva}
-\date{September 2019}
-\maketitle
-
-Hyperparameters:
-\begin{itemize}
-    \item Number of epochs: 4000
-    \item Batch size: 1600
-    \item Learning rate $0.001$
-    \item Number of folds: 5
-    \item Number of features: 53
-    \item Label column: 54 -- The no of comments in next H hrs (H is given in Feature no 39)
-\end{itemize}
-
-\begin{longtable}{llllllll}
-    \toprule
-            &	Fold 1  &   Fold 2 & Fold 3  & Fold 4 & Fold 5   & E & STD   \\
-    \midrule
 	$RMSE$ val	&	29.50	&	29.50	&	30.69	&	30.87	&	30.52	&	30.22	&	0.60	\\
 	$RMSE$ train	&	30.43	&	30.32	&	29.97	&	29.99	&	30.05	&	30.15	&	0.19	\\
 	$R^2$ val	&	0.34	&	0.27	&	0.27	&	0.28	&	0.27	&	0.28	&	0.03	\\
@@ -82,9 +56,3 @@ Hyperparameters:
 	$W52$	&	-0.32	&	-0.23	&	-0.24	&	-0.25	&	-0.32	&	-0.27	&	0.04	\\
 	$W53$	&	-0.22	&	-0.01	&	-0.05	&	-0.22	&	-0.27	&	-0.15	&	0.10	\\
 	$W0$	&	6.16	&	6.30	&	6.25	&	6.00	&	6.28	&	6.20	&	0.11	\\
-    \bottomrule
-    \caption{Training results}
-	\label{tab:acc}
-\end{longtable}
-
-\end{document}

@@ -15,12 +15,12 @@ class Regressor(metaclass=abc.ABCMeta):
 
 
     @abc.abstractmethod
-    def evaluateLoss(self, z_batch, x_batch, batch_size, regularize):
+    def evaluateMetric(self, z_batch, x_batch, batch_size, metric_type, regularize):
         pass
 
 
     @abc.abstractmethod
-    def updateParameters(self, z_batch, x_batch, batch_size, lr):
+    def updateParameters(self, z_batch, x_batch, batch_size, lr, loss_type, regularize):
         pass
     
 

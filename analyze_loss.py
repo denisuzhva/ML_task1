@@ -12,7 +12,6 @@ def prepareRow(row):
     row = np.append(row, row_mean)
     row = np.append(row, row_std)
     row = np.round(row, 2)
-    print(row.shape)
     return row
 
 

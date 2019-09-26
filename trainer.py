@@ -75,7 +75,7 @@ class Trainer:
                     self._train_dataset[fold_iter*fold_size:(fold_iter + 1)*fold_size, feature_iter] /= f_max
 
 
-    # Misc
+    ## Misc
     def _makeFolds(self, dataset, labels, start_index, end_index, is_train):
         if is_train:
             np.delete(dataset,
@@ -91,6 +91,7 @@ class Trainer:
         return dataset, labels
 
 
+    ## Training Algo
     def iterateOverHyperparams(self):
         metrics_tensor = np.zeros((len(self._batch_list),  # write at each batch
                                    self._num_folds,  # at each fold
@@ -118,7 +119,6 @@ class Trainer:
         return metrics_tensor, weight_tensor, time_tensor               
 
 
-    ## Training Algo
     def _trainModel(self, metrics_tensor, weight_tensor, time_tensor, batch_size, batch_size_counter):
         fold_size = self._train_dataset_size // self._num_folds
         batches_per_fold = fold_size // batch_size

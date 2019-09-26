@@ -29,7 +29,7 @@ if __name__ == '__main__':
     trainer.normalizeDatasets() # normalize data set
     trainer.shuffleDataset()    # shuffle data samples
 
-    train_metric_data, train_weights_data, time_data = trainer.trainModel()
+    train_metric_data, train_weights_data, time_data = trainer.iterateOverHyperparams()
 
     np.save('./TrainData/metrics.npy', train_metric_data)
     np.save('./TrainData/train_weights.npy', train_weights_data)

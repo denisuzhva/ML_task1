@@ -15,19 +15,20 @@ def prepareRow(row):
     return row
 
 
-def plotLoss(metric_data, fold_num, is_rmse=True, is_train=True):
-    epoch_data = np.arange(0, 1000, 10)
-    plot_data = metric_data[:, fold_num, :, 0 if is_rmse else 1, 0 if is_train else 1]
+def plotLoss(metric_data, is_rmse=True, is_train=True):
+    epoch_data = np.arange(0, 4000, 40)
+    plot_data = metric_data[0, :, :, 0 if is_rmse else 1, 0 if is_train else 1]
     plt.figure(figsize=(12, 8))
-    for batch_iter in range(plot_data.shape[0]):
-        plt.plot(epoch_data, plot_data[batch_iter, :], label='BS = %d' % (100 * 2 ** (0+batch_iter)))
+    for fold_iter in range(plot_data.shape[0]):
+        plt.plot(epoch_data, plot_data[fold_iter, :], label='Fold # %d' % (fold_iter))
     
-    plt.axis([0, 1000, 0, np.max(plot_data) * 1.2])
+    plt.axis([0, 4000, np.min(plot_data) * 0.95, np.max(plot_data) * 1.2])
 
-    plt.title('Metric on epoch (fold number: %d, %s loss)' % (fold_num, 'train' if is_train else 'validation'))
+    plt.title('%s on epoch (%s loss)' % ('RMSE' if is_rmse else 'R2', 
+                                         'train' if is_train else 'validation'))
     plt.legend(fontsize=10)
     plt.xlabel('Epoch', fontsize=14)
-    plt.ylabel('Metric value', fontsize=14)
+    plt.ylabel('%s value' % 'RMSE' if is_rmse else 'R2', fontsize=14)
     
     plt.minorticks_on()
     plt.grid(b=True, which='major', color='#666666', linestyle='-', alpha=0.2)
@@ -38,7 +39,8 @@ def plotLoss(metric_data, fold_num, is_rmse=True, is_train=True):
 
 if __name__ == '__main__':
     metric_data = np.load('../TrainData/metrics.npy')
-    #plotLoss(metric_data, 2, True, False)
+    print(metric_data.shape)
+    plotLoss(metric_data, False, False)
     
     batch = 0
     rows = [metric_data[batch, :, -1, 0, 1],   # RMSE val 

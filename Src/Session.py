@@ -17,15 +17,14 @@ class Session:
                         epochs, epoch_quant,
                         batch_size,
                         num_folds,
-                        learning_rate,
-                        metric_list):
+                        learning_rate):
 
         dataset_size = dataset.shape[0]
         num_features = dataset.shape[1]
 
         metrics_tensor = np.zeros((num_folds,
                                    epoch_quant,
-                                   len(metric_list),
+                                   2,
                                    2),
                                   dtype=float)  
 
@@ -59,21 +58,23 @@ class Session:
 
                 if epoch_iter % (epochs // epoch_quant) == 0:
 
-                    for metric_counter, metric_type in enumerate(metric_list, start=0):
-                        train_pred = model.getPrediction(train_folds)
-                        val_pred = model.getPrediction(val_folds)
+                    train_pred = model.getPrediction(train_folds)
+                    val_pred = model.getPrediction(val_folds)
 
-                        train_metric = eva.regressor(train_labels, 
-                                                     train_pred,
-                                                     metric_type)
-                        val_metric = eva.regressor(val_labels, 
-                                                   val_pred,
-                                                   metric_type)
-                        assert ~np.isnan(train_metric)
-                        assert ~np.isnan(val_metric)   
+                    train_rmse = eva.rmseMetric(train_pred, train_labels)
+                    val_rmse = eva.rmseMetric(val_pred, val_labels)
+                    train_r2 = eva.r2Metric(train_pred, train_labels)
+                    val_r2 = eva.r2Metric(train_pred, train_labels)
 
-                        metrics_tensor[fold_iter][epoch_quant_iter][metric_counter][0] = train_metric
-                        metrics_tensor[fold_iter][epoch_quant_iter][metric_counter][1] = val_metric 
+                    assert ~np.isnan(train_rmse)
+                    assert ~np.isnan(val_rmse)
+                    assert ~np.isnan(train_r2)
+                    assert ~np.isnan(val_r2) 
+
+                    metrics_tensor[fold_iter][epoch_quant_iter][0][0] = train_rmse 
+                    metrics_tensor[fold_iter][epoch_quant_iter][0][1] = val_rmse 
+                    metrics_tensor[fold_iter][epoch_quant_iter][1][0] = train_r2 
+                    metrics_tensor[fold_iter][epoch_quant_iter][1][1] = val_r2 
                    
                     model_w, model_b = model.getWeights()
                     model_w_full = np.append(model_w, model_b)

@@ -9,9 +9,8 @@ LR = 1 * 1e-3   # learning rate constant
 BATCH_LIST = [1600] # batches to test
 #BATCH_LIST = [1600]
 NUM_EPOCHS = 4000   # number of epochs
-EPOCH_QUANTIZER = 100   # write metric values each "EPOCH_QUANTIZER" time
+EPOCH_QUANTIZER = 100   # write metric values "EPOCH_QUANTIZER" times
 NUM_FOLDS = 5   # number of folds
-METRIC_LIST = ['RMSE', 'R2']    # list of metrics to write
 REG_GAMMA = 0.1 # gamma parameter (for regularization)
 
 
@@ -44,7 +43,7 @@ if __name__ == '__main__':
     metrics_tensor = np.zeros((len(BATCH_LIST),  # write at each batch
                                NUM_FOLDS,  # at each fold
                                EPOCH_QUANTIZER,   # ...at each self._epoch_quantize_param's epoch
-                               len(METRIC_LIST),    # for all the metrics to write
+                               2,    # for all the metrics to write
                                2),   # for train and validation metric
                                dtype=np.float)  
 
@@ -69,8 +68,7 @@ if __name__ == '__main__':
                                                                NUM_EPOCHS, EPOCH_QUANTIZER, 
                                                                batch_size, 
                                                                NUM_FOLDS,
-                                                               LR,
-                                                               METRIC_LIST)
+                                                               LR)
 
     ################
     ## Write data ##

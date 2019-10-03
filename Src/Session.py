@@ -64,7 +64,7 @@ class Session:
                     train_rmse = eva.rmseMetric(train_pred, train_labels)
                     val_rmse = eva.rmseMetric(val_pred, val_labels)
                     train_r2 = eva.r2Metric(train_pred, train_labels)
-                    val_r2 = eva.r2Metric(train_pred, train_labels)
+                    val_r2 = eva.r2Metric(val_pred, val_labels)
 
                     assert ~np.isnan(train_rmse)
                     assert ~np.isnan(val_rmse)

@@ -8,7 +8,7 @@ NUM_FEATURES = 53   # number of features
 LR = 1 * 1e-3   # learning rate constant
 BATCH_LIST = [1600] # batches to test
 #BATCH_LIST = [1600]
-NUM_EPOCHS = 4000   # number of epochs
+NUM_EPOCHS = 50000   # number of epochs
 EPOCH_QUANTIZER = 100   # write metric values "EPOCH_QUANTIZER" times
 NUM_FOLDS = 5   # number of folds
 REG_GAMMA = 0.1 # gamma parameter (for regularization)
@@ -61,18 +61,16 @@ if __name__ == '__main__':
     for batch_size_counter, batch_size in enumerate(BATCH_LIST, start=0):
         print('=== Current batch size: %d ===' % batch_size)      
 
-        metrics_tensor[batch_size_counter], 
-        weight_tensor[batch_size_counter], 
-        time_tensor[batch_size_counter] = sess.crossValidation(linear_regressor, 
-                                                               dataset, labels, 
-                                                               NUM_EPOCHS, EPOCH_QUANTIZER, 
-                                                               batch_size, 
-                                                               NUM_FOLDS,
-                                                               LR)
+        metrics_tensor[batch_size_counter], weight_tensor[batch_size_counter], time_tensor[batch_size_counter] = sess.crossValidation(linear_regressor, 
+                                                                                                                                      dataset, labels, 
+                                                                                                                                      NUM_EPOCHS, EPOCH_QUANTIZER, 
+                                                                                                                                      batch_size, 
+                                                                                                                                      NUM_FOLDS,
+                                                                                                                                      LR)
 
     ################
     ## Write data ##
 
-    np.save('./TrainData/metrics.npy', metrics_tensor)
-    np.save('./TrainData/weights.npy', weight_tensor)
-    np.save('./TrainData/time.npy', time_tensor)
+    np.save('../TrainData/metrics.npy', metrics_tensor)
+    np.save('../TrainData/weights.npy', weight_tensor)
+    np.save('../TrainData/time.npy', time_tensor)

@@ -16,13 +16,13 @@ def prepareRow(row):
 
 
 def plotLoss(metric_data, is_rmse=True, is_train=True):
-    epoch_data = np.arange(0, 4000, 40)
+    epoch_data = np.arange(0, 50000, 500)
     plot_data = metric_data[0, :, :, 0 if is_rmse else 1, 0 if is_train else 1]
     plt.figure(figsize=(12, 8))
     for fold_iter in range(plot_data.shape[0]):
         plt.plot(epoch_data, plot_data[fold_iter, :], label='Fold # %d' % (fold_iter))
     
-    plt.axis([0, 4000, np.min(plot_data) * 0.95, np.max(plot_data) * 1.2])
+    plt.axis([0, 50000, np.min(plot_data) * 0.95, np.max(plot_data) * 1.2])
 
     plt.title('%s on epoch (%s loss)' % ('RMSE' if is_rmse else 'R2', 
                                          'train' if is_train else 'validation'))
@@ -40,7 +40,7 @@ def plotLoss(metric_data, is_rmse=True, is_train=True):
 if __name__ == '__main__':
     metric_data = np.load('../TrainData/metrics.npy')
     print(metric_data.shape)
-    plotLoss(metric_data, False, False)
+    plotLoss(metric_data, True, False)
     
     batch = 0
     rows = [metric_data[batch, :, -1, 0, 1],   # RMSE val 
